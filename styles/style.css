@@ -1,0 +1,255 @@
+/* Colors & Fonts */
+:root {
+  --color-bg: #f4fdff;
+  --color-text: #1f2128;
+  --color-accent: #2b68b3;
+  --color-secondary: #2b68b3;
+  --color-line: #cdc1e0;
+  --font-heading: Verdana, "Iowan Old Style", serif;
+  --font-body: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--color-text);
+  background: var(--color-bg);
+  line-height: 1.6;
+}
+
+h1, h2 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 1.2rem;
+}
+
+h2 {
+  font-size: 1.2rem;
+  margin-top: 1.6rem;
+  margin-bottom: 0.5rem;
+}
+
+a {
+  color: var(--color-accent);
+}
+
+/* Header */
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1.2rem 2rem;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.header-name {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.main-nav ul {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.main-nav a {
+  text-decoration: none;
+  color: var(--color-text);
+  padding: 0.3rem 0;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+/* HOVER/FOCUS */
+.main-nav a:hover,
+.main-nav a:focus-visible {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
+}
+
+/* Content Sections */
+.section {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.about-layout {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.profile-photo {
+  width: 220px;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 6px;
+  flex-shrink: 0; /* stop the image being compressed */
+}
+
+.about-text {
+  flex: 1; /* take up remaining space */
+  min-width: 0; /* allow this item to shrink instead */
+}
+
+.about-text h2:first-child {
+  margin-top: 0;
+}
+
+.skills-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 0.5rem;
+}
+
+.skills-table th,
+.skills-table td {
+  text-align: left;
+  padding: 0.6rem 0.8rem;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.skills-table th {
+  font-family: var(--font-heading);
+  color: var(--color-accent);
+}
+
+/* Gallery */
+.gallery {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.gallery-item {
+  flex: 1 1 280px; /* grows/shrinks, but wants to be 280px wide */
+  margin: 0;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 6px;
+  display: block;
+}
+
+.gallery-item figcaption {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--color-text);
+}
+
+/* Contact Form */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  max-width: 500px;
+}
+
+.contact-form label {
+  font-size: 0.9rem;
+  color: var(--color-text);
+  margin-top: 0.8rem;
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: 0.6rem;
+  border: 1px solid var(--color-line);
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 1rem;
+  background: white;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* HOVER/FOCUS */
+.contact-form input:focus-visible,
+.contact-form textarea:focus-visible {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(179, 101, 43, 0.15);
+}
+
+.contact-form button {
+  align-self: flex-start;
+  margin-top: 1rem;
+  padding: 0.6rem 1.4rem;
+  background: var(--color-accent);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.contact-form button:hover,
+.contact-form button:focus-visible {
+  background: #171ea1;
+}
+
+.contact-form button:active {
+  transform: scale(0.98);
+}
+
+/* Footer */
+.site-footer {
+  text-align: center;
+  padding: 2rem;
+  font-size: 0.9rem;
+  color: var(--color-text);
+}
+
+.site-footer a {
+  color: var(--color-text);
+}
+
+/* Media for mobile */
+@media (max-width: 600px) {
+  .site-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .main-nav ul {
+    flex-direction: column; /* stack instead of shrink */
+    gap: 0.8rem;
+  }
+
+  .about-layout {
+    flex-direction: column;
+  }
+
+  .profile-photo {
+    width: 100%;
+    height: 260px;
+  }
+
+  .gallery {
+    flex-direction: column;
+  }
+
+  .section {
+    padding: 2rem 1.2rem;
+  }
+}

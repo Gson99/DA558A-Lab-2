@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anton Gunnarsson - Portfolio</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+    <header class="site-header">
+        <p class="header-name">Anton Gunnarsson</p>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="#about-me">About me</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="https://github.com/Gson99" target="_blank" rel="noopener">GitHub ↗</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="about-me" class="section">
+           <h1>About Me</h1> 
+           <div class="about-layout">
+            <img
+                class="profile-photo"
+                src="assets/headshot.jpg"
+                alt="A picture of me">
+
+             <div class="about-text">
+                <h2>Biography</h2>
+                <p> I grew up in Halmstad and is currently studying Informaton Systems at Gothenburg University. 
+                    I have been interested in computers and tech since childhood when I used to play around on my parents laptop.</p>
+
+                <h2>Academic Interests &amp; Hobbies</h2>
+                <p> When I moved to Gothenburg to study, I also became interested in bouldering.</p>
+                <ul>
+                    <li>Programming - I like solving problems</li>
+                    <li>Bouldering - A fun way to exercise</li>
+                    <li>Video Games - A great way to relax</li>
+                </ul>
+
+                <h2>Future Goals</h2>
+                <p> My only real future goal right now is to graduate and find a job as a developer and save money for my dream car.</p>
+             </div>
+           </div>
+
+           <h2>Skills</h2>
+           <table class="skills-table">
+            <thead>
+                <tr>
+                    <th>Skill</th>
+                    <th>Proficiency</th>
+                    <th>Years of experience</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>HTML &amp; CSS</td>
+                    <td>Beginner</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>C#</td>
+                    <td>Intermediate</td>
+                    <td>2</td>
+                </tr>
+                <tr>
+                    <td>Python</td>
+                    <td>Intermediate</td>
+                    <td>3</td>
+                </tr>
+            </tbody>
+           </table>
+        </section>
+
+        <!-- Gallery -->
+        <section id="gallery" class="section">
+            <h1>Canvas</h1> <!-- Used seed-constraint here. Changed from "Gallery" to "Canvas" -->
+            <div class="gallery">
+                <figure class="gallery-item">
+                    <img src="assets/shoes.jpg" alt="My bouldering shoes">
+                    <figcaption>My bouldering shoes</figcaption>
+                </figure>
+                <figure class="gallery-item">
+                    <img src="assets/workstation.jpg" alt="My workstation">
+                    <figcaption>My workstation</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section id="contact" class="section">
+            <h1>Contact</h1>
+            <form
+                class="contact-form"
+                action="mailto:anton.gunnarsson0256@stud.hkr.se"
+                method="post"
+                enctype="text/plain">
+
+                <label for="name">Name</label>
+                <input type="text" id="name" name="Name" required>
+
+                <label for="mail">Your e-mail</label>
+                <input type="email" id="mail" name="Mail" required>
+
+                <label for="message">Message</label>
+                <textarea id="message" name="Message" rows="5" required></textarea>
+
+                <button type="submit">Send</button>
+            </form>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>Contact: anton.gunnarsson0256@stud.hkr.se</p>
+        <p>&copy; 2026 Anton Gunnarsson. All Rights Reserved.</p>
+        <p><a href="#">Privacy Policy</a> · <a href="#">Terms of Service</a></p>
+    </footer>
+</body>
+</html>
