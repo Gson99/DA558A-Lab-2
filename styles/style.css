@@ -172,7 +172,8 @@ a {
 }
 
 .contact-form input,
-.contact-form textarea {
+.contact-form textarea,
+.contact-form select {
   padding: 0.6rem;
   border: 1px solid var(--color-line);
   border-radius: 4px;
@@ -182,17 +183,31 @@ a {
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
+.contact-form textarea {
+  resize: vertical;
+}
+
+.contact-form label span {
+  font-size: 0.85em;
+  color: #5d6470;
+}
+
 /* HOVER/FOCUS */
 .contact-form input:focus-visible,
-.contact-form textarea:focus-visible {
+.contact-form textarea:focus-visible,
+.contact-form select:focus-visible {
   outline: none;
   border-color: var(--color-accent);
   box-shadow: 0 0 0 3px rgba(179, 101, 43, 0.15);
 }
 
-.contact-form button {
-  align-self: flex-start;
+.form-actions {
+  display: flex;
+  gap: 0.8rem;
   margin-top: 1rem;
+}
+
+.contact-form button {
   padding: 0.6rem 1.4rem;
   background: var(--color-accent);
   color: white;
@@ -210,6 +225,17 @@ a {
 
 .contact-form button:active {
   transform: scale(0.98);
+}
+
+.contact-form .reset-button {
+  background: transparent;
+  color: var(--color-accent);
+  border: 1px solid var(--color-accent);
+}
+
+.contact-form .reset-button:hover,
+.contact-form .reset-button:focus-visible {
+  background: #e8f1fc;
 }
 
 /* Footer */

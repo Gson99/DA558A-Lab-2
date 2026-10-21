@@ -99,16 +99,33 @@
                 method="post"
                 enctype="text/plain">
 
-                <label for="name">Name</label>
-                <input type="text" id="name" name="Name" required>
+                <label for="first-name">First Name</label>
+                <input type="text" id="first-name" name="First Name" required>
 
-                <label for="mail">Your e-mail</label>
-                <input type="email" id="mail" name="Mail" required>
+                <label for="last-name">Last Name</label>
+                <input type="text" id="last-name" name="Last Name" required>
+
+                <label for="mail">Email</label>
+                <input type="email" id="mail" name="Email" required>
+
+                <label for="subject">Subject</label>
+                <select id="subject" name="Subject" required>
+                    <option value="" selected disabled>Select a subject</option>
+                    <option value="selection1">Placeholder1</option>
+                    <option value="selection2">Placeholder2</option>
+                    <option value="selection3">Placeholder3</option>
+                </select>
+
+                <label for="phone">Phone Number <span>(optional)</span></label>
+                <input type="tel" id="phone" name="Phone Number">
 
                 <label for="message">Message</label>
-                <textarea id="message" name="Message" rows="5" required></textarea>
+                <textarea id="message" name="Message" rows="5" minlength="20" required></textarea>
 
-                <button type="submit">Send</button>
+                <div class="form-actions">
+                    <button type="submit">Submit</button>
+                    <button type="reset" class="reset-button">Clear</button>
+                </div>
             </form>
         </section>
     </main>
