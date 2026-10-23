@@ -187,6 +187,12 @@ a {
   resize: vertical;
 }
 
+.form-error {
+  color: #dc3545;
+  font-size: 0.85rem;
+  margin-top: -0.2rem;
+}
+
 .contact-form label span {
   font-size: 0.85em;
   color: #5d6470;
