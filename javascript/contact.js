@@ -5,8 +5,8 @@ const emailInput = document.getElementById("mail");
 const subjectSelect = document.getElementById("subject");
 const phoneInput = document.getElementById("phone");
 const messageTextarea = document.getElementById("message");
-const submitButton = document.querySelector("#submit-button");
-const resetButton = document.querySelector("#reset-button");
+const submitButton = document.getElementById("submit-button");
+const resetButton = document.getElementById("reset-button");
 
 function showError(input, message) {
     const errorId = `${input.id}-error`;
@@ -33,12 +33,32 @@ function clearError(input) {
 
 function validateName(input) {
     // Regex: Allow letters, spaces, and hyphens, but not numbers or special characters
-    if (input.value === "" || !/^\p{L}+(?:[ -]\p{L}+)*$/u.test(input.value)) {
+    const namePattern = /^\p{L}+(?:[ -]\p{L}+)*$/u;
+
+    if (input.value === "" || !namePattern.test(input.value)) {
         if (input.value === "") {
             clearError(input);
         } else {
             showError(input, "Only letters are allowed.");
         }
+        return false;
+    }
+
+    clearError(input);
+    return true;
+}
+
+function validateEmail(input) {
+    // Regex: Text before @, single @, a domain name, a dot, and a domain suffix
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (input.value === "") {
+        clearError(input);
+        return false;
+    }
+
+    if (!emailPattern.test(input.value)) {
+        showError(input, "Please enter a valid email address.");
         return false;
     }
 
@@ -52,4 +72,8 @@ firstNameInput.addEventListener("input", function () {
 
 lastNameInput.addEventListener("input", function () {
     validateName(lastNameInput);
+});
+
+emailInput.addEventListener("input", function () {
+    validateEmail(emailInput);
 });
