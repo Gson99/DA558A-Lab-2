@@ -77,3 +77,9 @@ lastNameInput.addEventListener("input", function () {
 emailInput.addEventListener("input", function () {
     validateEmail(emailInput);
 });
+
+resetButton.addEventListener("click", function () {
+    clearError(firstNameInput);
+    clearError(lastNameInput);
+    clearError(emailInput);
+});
