@@ -66,6 +66,23 @@ function validateEmail(input) {
     return true;
 }
 
+function validateMessage(input) {
+    const minimumLength = 20;
+
+    if (input.value === "") {
+        clearError(input);
+        return false;
+    }
+
+    if (input.value.length < minimumLength) {
+        showError(input, `Message must be at least ${minimumLength} characters long.`);
+        return false;
+    }
+
+    clearError(input);
+    return true;
+}
+
 firstNameInput.addEventListener("input", function () {
     validateName(firstNameInput);
 });
@@ -78,8 +95,13 @@ emailInput.addEventListener("input", function () {
     validateEmail(emailInput);
 });
 
+messageTextarea.addEventListener("input", function () {
+    validateMessage(messageTextarea);
+});
+
 resetButton.addEventListener("click", function () {
     clearError(firstNameInput);
     clearError(lastNameInput);
     clearError(emailInput);
+    clearError(messageTextarea);
 });
