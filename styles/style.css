@@ -193,6 +193,19 @@ a {
   margin-top: -0.2rem;
 }
 
+.character-counter {
+  font-size: 0.85rem;
+  margin-top: -0.2rem;
+}
+
+.character-counter.too-short {
+  color: #dc3545;
+}
+
+.character-counter.long-enough {
+  color: #168b54;
+}
+
 .contact-form label span {
   font-size: 0.85em;
   color: #5d6470;

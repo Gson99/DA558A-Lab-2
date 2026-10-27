@@ -5,8 +5,10 @@ const emailInput = document.getElementById("mail");
 const subjectSelect = document.getElementById("subject");
 const phoneInput = document.getElementById("phone");
 const messageTextarea = document.getElementById("message");
+const characterCounter = document.getElementById("message-counter");
 const submitButton = document.getElementById("submit-button");
 const resetButton = document.getElementById("reset-button");
+const minimumMessageLength = 20;
 
 function showError(input, message) {
     const errorId = `${input.id}-error`;
@@ -67,20 +69,20 @@ function validateEmail(input) {
 }
 
 function validateMessage(input) {
-    const minimumLength = 20;
+    const characterCount = input.value.length;
+    const isValid = characterCount >= minimumMessageLength;
 
-    if (input.value === "") {
-        clearError(input);
-        return false;
+    characterCounter.textContent = `${characterCount} / ${minimumMessageLength} characters`;
+
+    if (isValid) {
+        characterCounter.classList.add("long-enough");
+        characterCounter.classList.remove("too-short");
+    } else {
+        characterCounter.classList.add("too-short");
+        characterCounter.classList.remove("long-enough");
     }
 
-    if (input.value.length < minimumLength) {
-        showError(input, `Message must be at least ${minimumLength} characters long.`);
-        return false;
-    }
-
-    clearError(input);
-    return true;
+    return isValid;
 }
 
 firstNameInput.addEventListener("input", function () {
@@ -99,9 +101,16 @@ messageTextarea.addEventListener("input", function () {
     validateMessage(messageTextarea);
 });
 
+// Initial validation to show 0/20 characters on page load
+validateMessage(messageTextarea);
+
 resetButton.addEventListener("click", function () {
     clearError(firstNameInput);
     clearError(lastNameInput);
     clearError(emailInput);
-    clearError(messageTextarea);
+    //clearError(messageTextarea);
+
+    characterCounter.textContent = `0 / ${minimumMessageLength} characters`;
+    characterCounter.classList.remove("long-enough");
+    characterCounter.classList.add("too-short");
 });
