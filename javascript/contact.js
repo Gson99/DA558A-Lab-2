@@ -38,6 +38,7 @@ function clearForm() {
     clearError(firstNameInput);
     clearError(lastNameInput);
     clearError(emailInput);
+    clearError(subjectSelect);
 
     characterCounter.textContent = `0 / ${minimumMessageLength} characters`;
     characterCounter.classList.remove("long-enough");
@@ -96,6 +97,16 @@ function validateMessage(input) {
     return isValid;
 }
 
+function validateSubject(input) {
+    if (input.value === "") {
+        showError(input, "Please select a subject.");
+        return false;
+    }
+
+    clearError(input);
+    return true;
+}
+
 firstNameInput.addEventListener("input", function () {
     validateName(firstNameInput);
 });
@@ -110,6 +121,27 @@ emailInput.addEventListener("input", function () {
 
 messageTextarea.addEventListener("input", function () {
     validateMessage(messageTextarea);
+});
+
+contactForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const firstNameIsValid = validateName(firstNameInput);
+    const lastNameIsValid = validateName(lastNameInput);
+    const emailIsValid = validateEmail(emailInput);
+    const subjectIsValid = validateSubject(subjectSelect);
+    const messageIsValid = validateMessage(messageTextarea);
+
+    const formIsValid =
+        firstNameIsValid &&
+        lastNameIsValid &&
+        emailIsValid &&
+        subjectIsValid &&
+        messageIsValid;
+
+    if (formIsValid) {
+        console.log("Form is valid and ready to be submitted.");
+    }
 });
 
 // Initial validation to show 0/20 characters on page load
