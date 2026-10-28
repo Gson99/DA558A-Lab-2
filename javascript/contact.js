@@ -33,6 +33,17 @@ function clearError(input) {
     input.removeAttribute("aria-describedby");
 }
 
+// Clear all error messages and reset the character counter, form fields are cleared in HTML
+function clearForm() {
+    clearError(firstNameInput);
+    clearError(lastNameInput);
+    clearError(emailInput);
+
+    characterCounter.textContent = `0 / ${minimumMessageLength} characters`;
+    characterCounter.classList.remove("long-enough");
+    characterCounter.classList.add("too-short");
+}
+
 function validateName(input) {
     // Regex: Allow letters, spaces, and hyphens, but not numbers or special characters
     const namePattern = /^\p{L}+(?:[ -]\p{L}+)*$/u;
@@ -105,12 +116,5 @@ messageTextarea.addEventListener("input", function () {
 validateMessage(messageTextarea);
 
 resetButton.addEventListener("click", function () {
-    clearError(firstNameInput);
-    clearError(lastNameInput);
-    clearError(emailInput);
-    //clearError(messageTextarea);
-
-    characterCounter.textContent = `0 / ${minimumMessageLength} characters`;
-    characterCounter.classList.remove("long-enough");
-    characterCounter.classList.add("too-short");
+    clearForm();
 });
