@@ -6,9 +6,11 @@ const subjectSelect = document.getElementById("subject");
 const phoneInput = document.getElementById("phone");
 const messageTextarea = document.getElementById("message");
 const characterCounter = document.getElementById("message-counter");
+const successMessage = document.getElementById("success-message");
 const submitButton = document.getElementById("submit-button");
 const resetButton = document.getElementById("reset-button");
 const minimumMessageLength = 20;
+let successTimeoutId;
 
 function showError(input, message) {
     const errorId = `${input.id}-error`;
@@ -140,7 +142,17 @@ contactForm.addEventListener("submit", function (event) {
         messageIsValid;
 
     if (formIsValid) {
-        console.log("Form is valid and ready to be submitted.");
+        contactForm.reset();
+        clearForm();
+        successMessage.textContent =
+            `Thank you ${firstNameInput.value}! I will contact you soon!`;
+        successMessage.hidden = false;
+
+        clearTimeout(successTimeoutId);
+        successTimeoutId = setTimeout(function () {
+            successMessage.textContent = "";
+            successMessage.hidden = true;
+        }, 3000);
     }
 });
 
@@ -149,4 +161,7 @@ validateMessage(messageTextarea);
 
 resetButton.addEventListener("click", function () {
     clearForm();
+    clearTimeout(successTimeoutId);
+    successMessage.textContent = "";
+    successMessage.hidden = true;
 });

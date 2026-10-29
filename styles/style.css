@@ -206,6 +206,12 @@ a {
   color: #168b54;
 }
 
+.success-message {
+  color: #168b54;
+  font-size: 0.95rem;
+  margin: 1rem 0 0;
+}
+
 .contact-form label span {
   font-size: 0.85em;
   color: #5d6470;
