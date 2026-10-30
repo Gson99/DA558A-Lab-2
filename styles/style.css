@@ -226,6 +226,18 @@ a {
   box-shadow: 0 0 0 3px rgba(179, 101, 43, 0.15);
 }
 
+.contact-form input.is-error,
+.contact-form textarea.is-error,
+.contact-form select.is-error {
+  border-color: #dc3545;
+}
+
+.contact-form input.is-valid,
+.contact-form textarea.is-valid,
+.contact-form select.is-valid {
+  border-color: #168b54;
+}
+
 .form-actions {
   display: flex;
   gap: 0.8rem;

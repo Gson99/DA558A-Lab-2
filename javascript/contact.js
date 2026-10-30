@@ -25,14 +25,22 @@ function showError(input, message) {
     }
 
     errorMessage.textContent = message;
+    input.classList.add("is-error");
+    input.classList.remove("is-valid");
     input.setAttribute("aria-invalid", "true");
     input.setAttribute("aria-describedby", errorId);
 }
 
 function clearError(input) {
     document.querySelector(`#${input.id}-error`)?.remove();
+    input.classList.remove("is-error", "is-valid");
     input.removeAttribute("aria-invalid");
     input.removeAttribute("aria-describedby");
+}
+
+function markValid(input) {
+    clearError(input);
+    input.classList.add("is-valid");
 }
 
 // Clear all error messages and reset the character counter, form fields are cleared in HTML
@@ -41,6 +49,7 @@ function clearForm() {
     clearError(lastNameInput);
     clearError(emailInput);
     clearError(subjectSelect);
+    clearError(messageTextarea);
 
     characterCounter.textContent = `0 / ${minimumMessageLength} characters`;
     characterCounter.classList.remove("long-enough");
@@ -51,16 +60,17 @@ function validateName(input) {
     // Regex: Allow letters, spaces, and hyphens, but not numbers or special characters
     const namePattern = /^\p{L}+(?:[ -]\p{L}+)*$/u;
 
-    if (input.value === "" || !namePattern.test(input.value)) {
-        if (input.value === "") {
-            clearError(input);
-        } else {
-            showError(input, "Only letters are allowed.");
-        }
+    if (input.value === "") {
+        showError(input, "This field is required.");
         return false;
     }
 
-    clearError(input);
+    if (!namePattern.test(input.value)) {
+        showError(input, "Only letters are allowed.");
+        return false;
+    }
+
+    markValid(input);
     return true;
 }
 
@@ -69,7 +79,7 @@ function validateEmail(input) {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (input.value === "") {
-        clearError(input);
+        showError(input, "This field is required.");
         return false;
     }
 
@@ -78,7 +88,7 @@ function validateEmail(input) {
         return false;
     }
 
-    clearError(input);
+    markValid(input);
     return true;
 }
 
@@ -91,9 +101,12 @@ function validateMessage(input) {
     if (isValid) {
         characterCounter.classList.add("long-enough");
         characterCounter.classList.remove("too-short");
+        markValid(input);
     } else {
         characterCounter.classList.add("too-short");
         characterCounter.classList.remove("long-enough");
+        input.classList.add("is-error");
+        input.classList.remove("is-valid");
     }
 
     return isValid;
@@ -105,7 +118,7 @@ function validateSubject(input) {
         return false;
     }
 
-    clearError(input);
+    markValid(input);
     return true;
 }
 
@@ -119,6 +132,10 @@ lastNameInput.addEventListener("input", function () {
 
 emailInput.addEventListener("input", function () {
     validateEmail(emailInput);
+});
+
+subjectSelect.addEventListener("change", function () {
+    validateSubject(subjectSelect);
 });
 
 messageTextarea.addEventListener("input", function () {
@@ -142,10 +159,11 @@ contactForm.addEventListener("submit", function (event) {
         messageIsValid;
 
     if (formIsValid) {
+        const firstName = firstNameInput.value;
         contactForm.reset();
         clearForm();
         successMessage.textContent =
-            `Thank you ${firstNameInput.value}! I will contact you soon!`;
+            `Thank you ${firstName}! I will contact you soon!`;
         successMessage.hidden = false;
 
         clearTimeout(successTimeoutId);
