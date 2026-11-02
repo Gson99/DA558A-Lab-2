@@ -191,6 +191,12 @@ a {
   color: #dc3545;
   font-size: 0.85rem;
   margin-top: -0.2rem;
+  opacity: 1;
+  transition: opacity 0.2s ease;
+}
+
+.form-error.is-hidden {
+  opacity: 0;
 }
 
 .character-counter {
@@ -210,6 +216,12 @@ a {
   color: #168b54;
   font-size: 0.95rem;
   margin: 1rem 0 0;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.success-message.is-visible {
+  opacity: 1;
 }
 
 .contact-form label span {

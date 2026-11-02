@@ -11,6 +11,7 @@ const submitButton = document.getElementById("submit-button");
 const resetButton = document.getElementById("reset-button");
 const minimumMessageLength = 20;
 let successTimeoutId;
+let successHideTimeoutId;
 
 function showError(input, message) {
     const errorId = `${input.id}-error`;
@@ -20,11 +21,19 @@ function showError(input, message) {
     if (!errorMessage) {
         errorMessage = document.createElement("span");
         errorMessage.id = errorId;
-        errorMessage.className = "form-error";
+        errorMessage.className = "form-error is-hidden";
         input.insertAdjacentElement("afterend", errorMessage);
     }
 
+    if (errorMessage.dataset.fadeTimeout) {
+        clearTimeout(Number(errorMessage.dataset.fadeTimeout));
+        delete errorMessage.dataset.fadeTimeout;
+    }
+
     errorMessage.textContent = message;
+    requestAnimationFrame(function () {
+        errorMessage.classList.remove("is-hidden");
+    });
     input.classList.add("is-error");
     input.classList.remove("is-valid");
     input.setAttribute("aria-invalid", "true");
@@ -32,7 +41,16 @@ function showError(input, message) {
 }
 
 function clearError(input) {
-    document.querySelector(`#${input.id}-error`)?.remove();
+    const errorMessage = document.querySelector(`#${input.id}-error`);
+
+    if (errorMessage) {
+        errorMessage.classList.add("is-hidden");
+        const fadeTimeout = setTimeout(function () {
+            errorMessage.remove();
+        }, 200);
+        errorMessage.dataset.fadeTimeout = String(fadeTimeout);
+    }
+
     input.classList.remove("is-error", "is-valid");
     input.removeAttribute("aria-invalid");
     input.removeAttribute("aria-describedby");
@@ -41,6 +59,24 @@ function clearError(input) {
 function markValid(input) {
     clearError(input);
     input.classList.add("is-valid");
+}
+
+function showSuccessMessage(message) {
+    clearTimeout(successHideTimeoutId);
+    successMessage.textContent = message;
+    successMessage.hidden = false;
+    requestAnimationFrame(function () {
+        successMessage.classList.add("is-visible");
+    });
+}
+
+function hideSuccessMessage() {
+    successMessage.classList.remove("is-visible");
+    clearTimeout(successHideTimeoutId);
+    successHideTimeoutId = setTimeout(function () {
+        successMessage.textContent = "";
+        successMessage.hidden = true;
+    }, 300);
 }
 
 // Clear all error messages and reset the character counter, form fields are cleared in HTML
@@ -162,15 +198,12 @@ contactForm.addEventListener("submit", function (event) {
         const firstName = firstNameInput.value;
         contactForm.reset();
         clearForm();
-        successMessage.textContent =
-            `Thank you ${firstName}! I will contact you soon!`;
-        successMessage.hidden = false;
+        showSuccessMessage(
+            `Thank you ${firstName}! I will contact you soon!`
+        );
 
         clearTimeout(successTimeoutId);
-        successTimeoutId = setTimeout(function () {
-            successMessage.textContent = "";
-            successMessage.hidden = true;
-        }, 3000);
+        successTimeoutId = setTimeout(hideSuccessMessage, 3000);
     }
 });
 
@@ -180,6 +213,6 @@ validateMessage(messageTextarea);
 resetButton.addEventListener("click", function () {
     clearForm();
     clearTimeout(successTimeoutId);
-    successMessage.textContent = "";
-    successMessage.hidden = true;
+    clearTimeout(successHideTimeoutId);
+    hideSuccessMessage();
 });
