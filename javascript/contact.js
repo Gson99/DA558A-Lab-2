@@ -25,11 +25,13 @@ function showError(input, message) {
         input.insertAdjacentElement("afterend", errorMessage);
     }
 
+    // Clear any existing fade timeout to prevent the error message from disappearing prematurely
     if (errorMessage.dataset.fadeTimeout) {
         clearTimeout(Number(errorMessage.dataset.fadeTimeout));
         delete errorMessage.dataset.fadeTimeout;
     }
 
+    // Set the error message text and make it visible
     errorMessage.textContent = message;
     requestAnimationFrame(function () {
         errorMessage.classList.remove("is-hidden");
@@ -43,6 +45,7 @@ function showError(input, message) {
 function clearError(input) {
     const errorMessage = document.querySelector(`#${input.id}-error`);
 
+    // If the error message element exists, hide it and remove it after a short delay
     if (errorMessage) {
         errorMessage.classList.add("is-hidden");
         const fadeTimeout = setTimeout(function () {
@@ -61,6 +64,7 @@ function markValid(input) {
     input.classList.add("is-valid");
 }
 
+// Show the success message and hide it after a short delay
 function showSuccessMessage(message) {
     clearTimeout(successHideTimeoutId);
     successMessage.textContent = message;
@@ -70,6 +74,7 @@ function showSuccessMessage(message) {
     });
 }
 
+// Hide the success message after a short delay to allow for a fade-out effect
 function hideSuccessMessage() {
     successMessage.classList.remove("is-visible");
     clearTimeout(successHideTimeoutId);
@@ -194,6 +199,7 @@ contactForm.addEventListener("submit", function (event) {
         subjectIsValid &&
         messageIsValid;
 
+    // If the form is valid, reset the form and show a success message
     if (formIsValid) {
         const firstName = firstNameInput.value;
         contactForm.reset();
