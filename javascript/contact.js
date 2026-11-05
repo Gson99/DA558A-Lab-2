@@ -42,6 +42,32 @@ function showError(input, message) {
     input.setAttribute("aria-describedby", errorId);
 }
 
+/* 
+function showError(input, message) {
+    const errorMessage =
+        document.getElementById(`${input.id}-error`);
+
+    errorMessage.textContent = message;
+    errorMessage.classList.add("is-visible");
+
+    input.classList.add("is-error");
+    input.classList.remove("is-valid");
+    input.setAttribute("aria-invalid", "true");
+    input.setAttribute("aria-describedby", errorMessage.id);
+}
+
+function clearError(input) {
+    const errorMessage =
+        document.getElementById(`${input.id}-error`);
+
+    errorMessage.classList.remove("is-visible");
+
+    input.classList.remove("is-error", "is-valid");
+    input.removeAttribute("aria-invalid");
+    input.removeAttribute("aria-describedby");
+}
+*/
+
 function clearError(input) {
     const errorMessage = document.querySelector(`#${input.id}-error`);
 
@@ -135,7 +161,7 @@ function validateEmail(input) {
 
 function validateMessage(input) {
     const characterCount = input.value.length;
-    const isValid = characterCount >= minimumMessageLength;
+    const isValid = characterCount >= minimumMessageLength && characterCount <= 40;
 
     characterCounter.textContent = `${characterCount} / ${minimumMessageLength} characters`;
 
